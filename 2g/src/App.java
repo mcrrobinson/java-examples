@@ -11,25 +11,6 @@ public class App {
         return userInput;
     }
 
-    private static int exceedLimitA(int upperLimit, int exceed) {
-        while (exceed < upperLimit) {
-            exceed += userInput("Enter a number: ").nextInt();
-        }
-        return exceed;
-    }
-
-    private static void oneA() {
-        int exceed = 0;
-        exceed = exceedLimitA(userInput("Enter the upper boundary: ").nextInt(), exceed);
-
-        String queryUpdatedLimit = userInput("Do you wish to increase the upper limit? (Y/N)").nextLine();
-        if (queryUpdatedLimit.equals("Y") || queryUpdatedLimit.equals("y")) {
-            exceed = exceedLimitA(userInput("What do you wish to increase it by? ").nextInt(), exceed);
-        }
-        System.out.println(exceed);
-    }
-
-    
     /*
         Checks to see if a number is a prime, use public as could
         be a useful helper function.
@@ -41,23 +22,42 @@ public class App {
         return true;
     }
 
+    private static int exceedLimitA(int upperLimit, int exceed) {
+        while (exceed < upperLimit) exceed += userInput("Enter a number: ").nextInt();
+        return exceed;
+    }
+
+    private static void questionA() {
+        int exceed = 0;
+        exceed = exceedLimitA(userInput("Enter the upper boundary: ").nextInt(), exceed);
+
+        String queryUpdatedLimit = userInput("Do you wish to increase the upper limit? (Y/N)").nextLine();
+        if (queryUpdatedLimit.equals("Y") || queryUpdatedLimit.equals("y")) 
+            exceed = exceedLimitA(
+                userInput("What do you wish to increase it by? ").nextInt(),
+                exceed
+            );
+        System.out.println(exceed);
+    }
+
     private static int exceedLimitB(int upperLimit, int exceed) {
         while (exceed < upperLimit) {
             int value = userInput("Enter a number: ").nextInt();
-            if (isPrime(value))
-                exceed += value; // If prime number add to sum.
+            if (isPrime(value)) exceed += value;
         }
         return exceed;
     }
 
-    private static void oneB() {
+    private static void questionB() {
         int exceed = 0;
         exceed = exceedLimitB(userInput("Enter the upper boundary: ").nextInt(), exceed);
 
         String queryUpdatedLimit = userInput("Do you wish to increase the upper limit? (Y/N)").nextLine();
-        if (queryUpdatedLimit.equals("Y") || queryUpdatedLimit.equals("y")) {
-            exceed = exceedLimitB(userInput("What do you wish to increase it by? ").nextInt(), exceed);
-        }
+        if (queryUpdatedLimit.equals("Y") || queryUpdatedLimit.equals("y"))
+            exceed = exceedLimitB(
+                userInput("What do you wish to increase it by? ").nextInt(), 
+                exceed
+            );
         System.out.println(exceed);
     }
 
@@ -69,20 +69,22 @@ public class App {
         return exceed;
     }
 
-    private static void oneC() {
+    private static void questionC() {
         int exceed = 0;
         exceed = exceedLimitC(userInput("Enter the upper boundary: ").nextInt(), exceed);
 
         String queryUpdatedLimit = userInput("Do you wish to increase the upper limit? (Y/N)").nextLine();
-        if (queryUpdatedLimit.equals("Y") || queryUpdatedLimit.equals("y")) {
-            exceed = exceedLimitC(userInput("What do you wish to increase it by? ").nextInt(), exceed);
-        }
+        if (queryUpdatedLimit.equals("Y") || queryUpdatedLimit.equals("y")) 
+            exceed = exceedLimitC(
+                userInput("What do you wish to increase it by? ").nextInt(), 
+                exceed
+            );
         System.out.println(exceed);
     }
 
     public static void main(String[] args) throws Exception {
-        oneA();
-        oneB();
-        oneC();
+        questionA();
+        questionB();
+        questionC();
     }
 }
