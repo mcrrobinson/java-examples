@@ -1,45 +1,39 @@
+
 public class SmartPlug {
-    
+    private String appliance;
+    private int roomID;
     private boolean status;
-    private String room;
-    private int ID;
 
-    public int getID() {
-        return ID;
-    }
-
-    public void setID(int ID) {
-        this.ID = ID;
-    }
-
-    public SmartPlug(boolean status, String room, int ID) {
-        this.status = status;
-        this.room = room;
-        this.ID = ID;
-    }
-
-    public boolean isStatus() {
-        return status;
-    }
-
-    public void setStatus(boolean status) {
+    public SmartPlug(String appliance, int roomID, boolean status) {
+        this.appliance = appliance;
+        this.roomID = roomID;
         this.status = status;
     }
 
-    public String getRoom() {
-        return room;
+    // Appliance connected to.
+    public String getAppliance(){
+        return this.appliance;
     }
 
-    public void setRoom(String room) {
-        this.room = room;
+    public void setAppliance(String appliance){
+        this.appliance = appliance;
     }
 
-    @Override
-    public String toString() {
-        return "\tstatus: " + status + "\t| room: " + room + "\t| ID: " + ID + "\n";
+    // Room ID
+    public int getRoomID(){
+        return this.roomID;
     }
 
-    public void toggle(){
-        setStatus(!isStatus());
+    public void setRoomID(int roomID){
+        this.roomID = roomID;
+    }
+
+    // Status
+    public boolean getStatus(){
+        return this.status;
+    }
+
+    public void setStatus(boolean status){
+        this.status = status;
     }
 }
