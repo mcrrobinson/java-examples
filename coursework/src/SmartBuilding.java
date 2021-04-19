@@ -10,9 +10,9 @@ public class SmartBuilding {
 
     public int size(){ return smartLights.length; }
 
-    public void add(double location, boolean value){
+    public void add(double location, boolean value, int id){
         if(currentIndex >= size()) { return;}
-	    SmartLightSwitch object = new SmartLightSwitch(value, location);
+	    SmartLightSwitch object = new SmartLightSwitch(value, location, id);
         smartLights[currentIndex] = object;
         currentIndex++;
     }
@@ -32,5 +32,31 @@ public class SmartBuilding {
             }
         }
     }
+
+    public String listLocations(){
+        String s = "";
+        for(SmartLightSwitch object : smartLights){
+            s += object.getLocation() + "\n";
+        }
+        return s;
+    }
+
+    public void toggle(double location){
+        for(SmartLightSwitch object : smartLights){
+            if(object.getLocation() == location){
+                object.toggle();
+                return;
+            }
+        }
+        System.out.println("Enter a valid location");
+    }
+    
+    public void changeLocation(int lightID, double newLocation){
+        for(SmartLightSwitch object : smartLights){
+            if(object.getID() == lightID){
+                object.setLocation(newLocation);
+            }
+        }
+    }    
 }
 

@@ -1,20 +1,49 @@
-public class App {
-    public static void main(String[] args) throws Exception {
+public class Dashboard {
 
-        // Initialise the size of the array
-        SmartBuilding smartBuilding = new SmartBuilding(5);
 
-        // Populate the array. Use an add() method and an appropriate way of ensuring that you do not go out of bounds
-        for (int i = 0; i < smartBuilding.size(); i++) {
-            smartBuilding.add(i,i%2 > 0 ? true: false);
+    public static void menuOptions(ConsoleEvents console, SmartBuilding factory) {
+
+        console.out("MENU OPTIONS");
+        console.out("please select option:");
+        console.out("1 - toggle lights in a location");
+        console.out("2 - move light switch to another location");
+    
+        int optionLevel = console.getInt("");
+    
+        switch (optionLevel) {
+            case 1:
+                console.out(factory.display());
+                factory.toggle(console.getDouble("Enter the location you wish to toggle"));
+                break;
+            case 2:
+                console.out(factory.display());
+                factory.changeLocation(
+                    console.getInt("Please enter the light ID"), 
+                    console.getDouble("Now enter the new location")
+                );
+            default:
+                console.out("please enter a valid option");
+    
+        }
+    }
+    public static void main(String[] args) {
+
+        ConsoleEvents console = new ConsoleEvents();
+        int size = console.getInt("Please enter number of light switches for this building");
+        SmartBuilding factory = new SmartBuilding(size);
+
+        for(int i = 0;i<factory.size();i++){
+            System.out.println("please enter a value to store in the array: ");
+            double location = console.getDouble("please enter location: ");
+            boolean status = console.getBoolean("please enter light status: 1 - on, 0 - off");
+            int id = console.getInt("please enter the light ID");
+            factory.add(location, status, id);
         }
 
-        // Display all values in the array.
-        System.out.printf("Before:\t %s\n", smartBuilding.display());  
-        
-        // Update a value in the smart light? Use the strategy guidance. 
-        smartBuilding.updateObject(3);
-        System.out.printf("After:\t %s\n",smartBuilding.display());  
-
+        while(true) {
+            console.out(factory.display());
+            console.menuOptions(factory);
+        }
+          
     }
 }
