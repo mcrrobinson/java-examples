@@ -30,19 +30,6 @@ public class ConsoleEvents {
         return i;
     }
 
-    public double getDouble(String string){
-        Scanner in = new Scanner(System.in);
-        double i;
-        out(string);
-        try {
-            i = in.nextDouble();
-        } catch (Exception e){
-           //extra messages 
-           return getDouble(string);
-        }
-        return i;
-    }
-
     public boolean getBoolean(String string) {
         Scanner in = new Scanner(System.in);
         int i;
@@ -65,24 +52,33 @@ public class ConsoleEvents {
     public void menuOptions(SmartBuilding factory) {
         out("MENU OPTIONS");
         out("please select option:");
-        out("1 - toggle lights in a location");
-        out("2 - move light switch to another location");
+        out("1 - house level options");
+        out("2 - room level options");
+        out("3 - plug level options");
+        out("4 - system options");
     
         int optionLevel = getInt("");
     
         switch (optionLevel) {
             case 1:
-                out(factory.display());
-                factory.toggle(getDouble("Enter the location you wish to toggle"));
                 break;
+                // out(factory.display());
+                // factory.toggle(getInt("Enter the room you wish to change"));
+                // break;
             case 2:
-                out(factory.display());
-                factory.changeLocation(
-                    getInt("Please enter the light ID"), 
-                    getDouble("Now enter the new location")
-                );
+                break;
+                // out(factory.display());
+                // factory.changeRoom(
+                //     getInt("Please enter the smart plug ID"), 
+                //     getInt("Now enter the new room")
+                // );
+            case 3:
+                break;
+            case 4:
+                break;
             default:
                 out("please enter a valid option");
+                break;
         }
     }
 

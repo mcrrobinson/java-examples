@@ -1,60 +1,62 @@
 public class SmartBuilding {
 
-    private SmartLightSwitch[] smartLights;
+    private SmartPlug[] smartPlug;
+    private SmartRoom[] smartRooms;
+    
     private int currentIndex;
     
     public SmartBuilding(int size) {
-        smartLights = new SmartLightSwitch[size];
+        smartPlug = new SmartPlug[size];
         currentIndex = 0;
     }
 
-    public int size(){ return smartLights.length; }
+    public int size(){ return smartPlug.length; }
 
-    public void add(double location, boolean value, int id){
+    public void add(String room, boolean value){
         if(currentIndex >= size()) { return;}
-	    SmartLightSwitch object = new SmartLightSwitch(value, location, id);
-        smartLights[currentIndex] = object;
+	    SmartPlug object = new SmartPlug(value, room, currentIndex);
+        smartPlug[currentIndex] = object;
         currentIndex++;
     }
     
     public String display(){
         String s = "";
-        for(SmartLightSwitch object : smartLights){
+        for(SmartPlug object : smartPlug){
             s+= object.toString() + " ";
         }
         return s;
     }
 
-    public void updateObject(double location){
-        for(SmartLightSwitch object : smartLights){      
-            if(object.getLocation() == location) {
+    public void updateObject(String room){
+        for(SmartPlug object : smartPlug){      
+            if(object.getRoom().equals(room)) {
                 object.setStatus(object.isStatus() == true ? false: true);
             }
         }
     }
 
-    public String listLocations(){
+    public String listRooms(){
         String s = "";
-        for(SmartLightSwitch object : smartLights){
-            s += object.getLocation() + "\n";
+        for(SmartPlug object : smartPlug){
+            s += object.getRoom() + "\n";
         }
         return s;
     }
 
-    public void toggle(double location){
-        for(SmartLightSwitch object : smartLights){
-            if(object.getLocation() == location){
+    public void toggle(String room){
+        for(SmartPlug object : smartPlug){
+            if(object.getRoom().equals(room)){
                 object.toggle();
                 return;
             }
         }
-        System.out.println("Enter a valid location");
+        System.out.println("Enter a valid room");
     }
     
-    public void changeLocation(int lightID, double newLocation){
-        for(SmartLightSwitch object : smartLights){
+    public void changeRoom(int lightID, String newRoom){
+        for(SmartPlug object : smartPlug){
             if(object.getID() == lightID){
-                object.setLocation(newLocation);
+                object.setRoom(newRoom);
             }
         }
     }    

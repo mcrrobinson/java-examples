@@ -1,7 +1,7 @@
-public class SmartLightSwitch {
+public class SmartPlug {
     
     private boolean status;
-    private double location;
+    private String room;
     private int ID;
 
     public int getID() {
@@ -12,9 +12,9 @@ public class SmartLightSwitch {
         this.ID = ID;
     }
 
-    public SmartLightSwitch(boolean status, double location, int ID) {
+    public SmartPlug(boolean status, String room, int ID) {
         this.status = status;
-        this.location = location;
+        this.room = room;
         this.ID = ID;
     }
 
@@ -26,17 +26,17 @@ public class SmartLightSwitch {
         this.status = status;
     }
 
-    public double getLocation() {
-        return location;
+    public String getRoom() {
+        return room;
     }
 
-    public void setLocation(double location) {
-        this.location = location;
+    public void setRoom(String room) {
+        this.room = room;
     }
 
     @Override
     public String toString() {
-        return "status: " + status + " | location: " + location + " | ID: " + ID + "\n";
+        return "\tstatus: " + status + "\t| room: " + room + "\t| ID: " + ID + "\n";
     }
 
     public void toggle(){
