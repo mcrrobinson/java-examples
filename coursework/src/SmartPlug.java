@@ -1,22 +1,32 @@
 
 public class SmartPlug {
-    private String appliance;
+    private int applianceID;
+    private int plugID;
     private int roomID;
     private boolean status;
 
-    public SmartPlug(String appliance, int roomID, boolean status) {
-        this.appliance = appliance;
+    public SmartPlug(int applianceID, int plugID, int roomID, boolean status) {
+        this.applianceID = applianceID;
+        this.plugID = plugID;
         this.roomID = roomID;
         this.status = status;
     }
 
-    // Appliance connected to.
-    public String getAppliance(){
-        return this.appliance;
+    // applianceID connected to.
+    public int getApplianceID(){
+        return this.applianceID;
     }
 
-    public void setAppliance(String appliance){
-        this.appliance = appliance;
+    public void setApplianceID(int applianceID){
+        this.applianceID = applianceID;
+    }
+
+    public int getPlugID(){
+        return this.plugID;
+    }
+
+    public void setPlugID(int plugID){
+        this.plugID = plugID;
     }
 
     // Room ID
