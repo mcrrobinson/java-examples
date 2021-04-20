@@ -15,29 +15,27 @@ public class SmartBuilding {
         this.smartAppliances = new ArrayList<String>(Arrays.asList("Lamp", "TV", "Computer", "Phone Charger", "Heater"));
     }
 
-    public void addSmartRoom(String room) {
+    public void addSmartRoom(String room, boolean extension) {
         if (this.smartRoomIndex >= smartRooms.size()) return;
         SmartRoom object = new SmartRoom(room, this.smartRoomIndex);
-        smartRooms.set(smartRoomIndex, object);
+
+        // If you're setting defined number of rooms, use set, if you're
+        // extending more more plugs use add.
+        if(!extension) smartRooms.set(this.smartRoomIndex, object);
+        else smartRooms.add(object);
+
         this.smartRoomIndex++;
     }
 
-    public void addExtendSmartRoom(String room) {          
-        SmartRoom object = new SmartRoom(room, this.smartRoomIndex);
-        smartRooms.add(object);
-        this.smartRoomIndex++;
-    }
-
-    public void addSmartPlug(int applianceID, int roomID, boolean status) {
+    public void addSmartPlug(int applianceID, int roomID, boolean status, boolean extension) {
         if (this.smartPlugIndex >= smartPlugs.size()) return;
         SmartPlug object = new SmartPlug(applianceID, this.smartPlugIndex, roomID, status);
-        smartPlugs.set(this.smartPlugIndex, object);
-        this.smartPlugIndex++;
-    }
-
-    public void addExtendSmartPlug(int applianceID, int roomID, boolean status){
-        SmartPlug object = new SmartPlug(applianceID, this.smartPlugIndex, roomID, status);
-        smartPlugs.add(object);
+        
+        // If you're setting defined number of plugs, use set, if you're
+        // extending more more plugs use add.
+        if(!extension) smartPlugs.set(this.smartPlugIndex, object);
+        else smartPlugs.add(object);
+        
         this.smartPlugIndex++;
     }
 
@@ -108,16 +106,14 @@ public class SmartBuilding {
     }
 
     public void enableAllRoomPlugs(int roomID) {
-        for (int i = 0; i < smartPlugs.size(); i++) {
-            if (smartPlugs.get(i).getRoomID() == roomID)
-                smartPlugs.get(i).setStatus(true);
+        for (SmartPlug smartPlug : smartPlugs) {
+            if(smartPlug.getRoomID()==roomID) smartPlug.setStatus(true);
         }
     }
 
     public void disableAllRoomPlugs(int roomID) {
-        for (int i = 0; i < smartPlugs.size(); i++) {
-            if (smartPlugs.get(i).getRoomID() == roomID)
-                smartPlugs.get(i).setStatus(false);
+        for (SmartPlug smartPlug : smartPlugs) {
+            if(smartPlug.getRoomID()==roomID) smartPlug.setStatus(false);
         }
     }
 
@@ -135,41 +131,31 @@ public class SmartBuilding {
 
     public void togglePlug(int plug) {
         for (SmartPlug smartPlug : smartPlugs) {
-            if (smartPlug.getPlugID() == plug) {
-                smartPlug.setStatus(smartPlug.getStatus() == false ? true : false);
-            }
+            if (smartPlug.getPlugID() == plug) smartPlug.setStatus(smartPlug.getStatus() == false ? true : false);
         }
     }
 
     public void enablePlug(int plug) {
         for (SmartPlug smartPlug : smartPlugs) {
-            if (smartPlug.getPlugID() == plug) {
-                smartPlug.setStatus(true);
-            }
+            if (smartPlug.getPlugID() == plug) smartPlug.setStatus(true);
         }
     }
 
     public void disablePlug(int plug) {
         for (SmartPlug smartPlug : smartPlugs) {
-            if (smartPlug.getPlugID() == plug) {
-                smartPlug.setStatus(false);
-            }
+            if (smartPlug.getPlugID() == plug) smartPlug.setStatus(false);
         }
     }
 
     public void changePlugAppliance(int plug, int applianceID) {
         for (SmartPlug smartPlug : smartPlugs) {
-            if (smartPlug.getPlugID() == plug) {
-                smartPlug.setApplianceID(applianceID);
-            }
+            if (smartPlug.getPlugID() == plug) smartPlug.setApplianceID(applianceID);
         }
     }
 
     public void changePlugRoom(int plug, int roomID) {
         for (SmartPlug smartPlug : smartPlugs) {
-            if (smartPlug.getPlugID() == plug) {
-                smartPlug.setRoomID(roomID);
-            }
+            if (smartPlug.getPlugID() == plug) smartPlug.setRoomID(roomID);
         }
     }
 

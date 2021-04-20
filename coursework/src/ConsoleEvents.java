@@ -122,14 +122,14 @@ public class ConsoleEvents {
                 // Enter the plug status.
                 boolean status = readInt("Enter plug status (1 = ON | 0 = OFF): ") == 1 ? true : false;
 
-                factory.addExtendSmartPlug(appliance, roomID, status);
+                factory.addSmartPlug(appliance, roomID, status, true);
             }
             break;
         case 2:
             int rooms = readInt("Enter the amount of rooms you wish to add: ");
             for (int i = 0; i < rooms; i++) {
                 String room = get("Enter Room Name: ").nextLine();
-                factory.addExtendSmartRoom(room);
+                factory.addSmartRoom(room, true);
             }
             break;
         case 3:
