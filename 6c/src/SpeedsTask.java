@@ -1,5 +1,5 @@
 import java.util.Scanner;
-public class Tasks {
+public class SpeedsTask {
     public static void main(String[] args) {
         int days = 4;
         Scanner input = new Scanner(System.in);

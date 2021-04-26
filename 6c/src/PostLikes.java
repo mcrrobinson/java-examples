@@ -32,8 +32,12 @@ public class PostLikes {
         return values;
     }
 
-    public String totalLikes() {
-        return null;
+    public int totalLikes() {
+        int sum = 0;
+        for (int element: this.likes) {
+            sum += element;
+         }
+        return sum;
     }
 
     public double averageLikes() {

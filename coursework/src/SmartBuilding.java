@@ -16,7 +16,6 @@ public class SmartBuilding {
     }
 
     public void addSmartRoom(String room, boolean extension) {
-        if (this.smartRoomIndex >= smartRooms.size()) return;
         SmartRoom object = new SmartRoom(room, this.smartRoomIndex);
 
         // If you're setting defined number of rooms, use set, if you're
@@ -28,7 +27,6 @@ public class SmartBuilding {
     }
 
     public void addSmartPlug(int applianceID, int roomID, boolean status, boolean extension) {
-        if (this.smartPlugIndex >= smartPlugs.size()) return;
         SmartPlug object = new SmartPlug(applianceID, this.smartPlugIndex, roomID, status);
         
         // If you're setting defined number of plugs, use set, if you're
@@ -70,7 +68,7 @@ public class SmartBuilding {
     public String displaySmartPlugs() {
         String s = "";
         for (int i = 0; i < sizeSmartPlug(); i++) {
-            s += "\tSmartPlug | attached to: " + smartAppliances.get(smartPlugs.get(i).getApplianceID()) + "\t| Room: "
+            s += "\t[ " + i + " ]\tSmartPlug | attached to: " + smartAppliances.get(smartPlugs.get(i).getApplianceID()) + "\t| Room: "
                     + smartRooms.get(smartPlugs.get(i).getRoomID()).getRoomName() + "\t| Status: "
                     + (smartPlugs.get(i).getStatus() == false ? "Off" : "On") + "\n";
         }

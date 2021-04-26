@@ -70,7 +70,7 @@ public class ConsoleEvents {
 
     public void smartPlugOptions(SmartBuilding factory) {
         out(factory.displaySmartPlugs());
-        int plug = readInt("Select a plug to toggle:");
+        int plug = readInt("Select a plug:");
 
         out("\nPLUG OPTIONS");
         out("1 - Switch plug off");

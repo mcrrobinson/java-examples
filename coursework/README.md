@@ -1,6 +1,14 @@
-## Getting Started
+<header style="text-align: center;">
+    <h2>SmartHome Dashboard Console</h2>
+</header>
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+The technical report should present the reasoning process in
+the design process for the whole project you have built and
+designed. Consider where data is stored, how it is accessed
+and updated and displayed. Consider carefully how you
+complied to the constraints (given above).
+<b>Please note if you only partially complete the project but
+document this clearly you will still achieve the grades.</b>
 
 ## Folder Structure
 

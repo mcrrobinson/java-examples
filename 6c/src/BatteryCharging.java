@@ -1,5 +1,3 @@
-
-
 public class BatteryCharging {
     private double[] chargingTime;
 
