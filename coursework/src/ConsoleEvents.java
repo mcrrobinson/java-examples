@@ -109,6 +109,7 @@ public class ConsoleEvents {
         switch (get("").nextInt()) {
         case 1:
             int plugs = readInt("Enter the amount of plugs you wish to add: ");
+            factory.addNewSmartPlugs(plugs);
             for (int i = 0; i < plugs; i++) {
 
                 // Enter the appliance ID for the plug.
@@ -122,18 +123,20 @@ public class ConsoleEvents {
                 // Enter the plug status.
                 boolean status = readInt("Enter plug status (1 = ON | 0 = OFF): ") == 1 ? true : false;
 
-                factory.addSmartPlug(appliance, roomID, status, true);
+                factory.addSmartPlug(appliance, roomID, status);
             }
             break;
         case 2:
             int rooms = readInt("Enter the amount of rooms you wish to add: ");
+            factory.addNewSmartRooms(rooms);
             for (int i = 0; i < rooms; i++) {
                 String room = get("Enter Room Name: ").nextLine();
-                factory.addSmartRoom(room, true);
+                factory.addSmartRoom(room);
             }
             break;
         case 3:
             int appliances = readInt("Enter the amount of appliances you wish to add: ");
+            factory.addNewSmartAppliances(appliances);
             for (int i = 0; i < appliances; i++) {
                 String appliance = get("Enter Appliance Name: ").nextLine();
                 factory.addSmartAppliance(appliance);

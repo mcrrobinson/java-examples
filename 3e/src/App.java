@@ -11,7 +11,7 @@ public class App {
         float sugarIntake = 0;
         while (true) {
             sugarIntake += userInput("Enter the amount of sugar: ").nextInt();
-            if(!(userInput("Type \"stop\" to exit the loop: ").nextLine().equals("stop"))){
+            if((userInput("Type \"stop\" to exit the loop: ").nextLine().equals("stop"))){
                 break;
             }
         }
@@ -30,8 +30,30 @@ public class App {
         }
         System.out.println(currentSugarValue);
     }
+
+    private static void toRecycle(){
+        int recycleNumber = 0;
+        System.out.println("Enter \"stop\" to exit the loop.");
+        while (true) {
+            String recycle = userInput("Enter item to be recycled: ").nextLine();
+            // Id like to use a switch but breaking out twice aint fun.
+            if(recycle.equals("stop")){
+                break;
+            } else if(recycle.equals("plastic")) {
+                recycleNumber += 1;
+            } else if(recycle.equals("glass")) {
+                recycleNumber += 3;
+            } else if(recycle.equals("cardboard")) {
+                recycleNumber += 2;
+            } else {
+                System.out.printf("%s isn't a valid input. Please enter either; plastic, glass, cardboard or stop.\n",recycle);
+            }
+        }
+        System.out.printf("%d points.\n", recycleNumber);
+    }
     public static void main(String[] args) throws Exception {
-        // sugarIntake();
+        sugarIntake();
         maximumSugarValue();
+        // toRecycle();
     }
 }

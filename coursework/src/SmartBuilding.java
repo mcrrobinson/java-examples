@@ -1,66 +1,92 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-
 public class SmartBuilding {
     private int smartPlugIndex = 0;
     private int smartRoomIndex = 0;
+    private int smartApplianceIndex = 5;
 
-    private ArrayList<SmartPlug> smartPlugs;
-    private ArrayList<SmartRoom> smartRooms;
-    private ArrayList<String> smartAppliances;
+    private SmartPlug smartPlugs[];
+    private SmartRoom smartRooms[];
+    private String[] smartAppliances = {"Lamp", "TV", "Computer", "Phone Charger", "Heater"};
 
     public SmartBuilding(int plugs, int rooms) {
-        this.smartPlugs = new ArrayList<SmartPlug>(Arrays.asList(new SmartPlug[plugs]));
-        this.smartRooms = new ArrayList<SmartRoom>(Arrays.asList(new SmartRoom[rooms]));
-        this.smartAppliances = new ArrayList<String>(Arrays.asList("Lamp", "TV", "Computer", "Phone Charger", "Heater"));
+        this.smartPlugs = new SmartPlug[plugs];
+        this.smartRooms = new SmartRoom[rooms];
     }
 
-    public void addSmartRoom(String room, boolean extension) {
+    public void addSmartRoom(String room) {
+        if(this.smartRoomIndex >= sizeSmartRoom()) return;
         SmartRoom object = new SmartRoom(room, this.smartRoomIndex);
 
         // If you're setting defined number of rooms, use set, if you're
         // extending more more plugs use add.
-        if(!extension) smartRooms.set(this.smartRoomIndex, object);
-        else smartRooms.add(object);
-
+        smartRooms[this.smartRoomIndex] = object;
         this.smartRoomIndex++;
     }
 
-    public void addSmartPlug(int applianceID, int roomID, boolean status, boolean extension) {
+    public void addSmartPlug(int applianceID, int roomID, boolean status) {
+        if(this.smartPlugIndex >= sizeSmartPlug()) return;
         SmartPlug object = new SmartPlug(applianceID, this.smartPlugIndex, roomID, status);
         
         // If you're setting defined number of plugs, use set, if you're
         // extending more more plugs use add.
-        if(!extension) smartPlugs.set(this.smartPlugIndex, object);
-        else smartPlugs.add(object);
-        
+        smartPlugs[this.smartPlugIndex] = object;       
         this.smartPlugIndex++;
     }
 
+    public void addSmartAppliance(String name) {
+        if(this.smartApplianceIndex >= sizeSmartAppliance()) return;
+        smartAppliances[this.smartApplianceIndex] = name;       
+        this.smartApplianceIndex++;
+    }
+
     public int sizeSmartPlug() {
-        return this.smartPlugs.size();
+        return this.smartPlugs.length;
     }
 
     public int sizeSmartRoom() {
-        return this.smartRooms.size();
+        return this.smartRooms.length;
     }
 
     public int sizeSmartAppliance() {
-        return this.smartAppliances.size();
+        return this.smartAppliances.length;
+    }
+
+    public void addNewSmartAppliances(int appliances) {
+        String[] newArr = new String[sizeSmartAppliance() + appliances];
+        for (int i = 0; i < sizeSmartAppliance(); i++) {
+            System.out.println(this.smartAppliances[i]);
+            newArr[i] = this.smartAppliances[i];
+        }
+        this.smartAppliances = newArr;
+    }
+
+    public void addNewSmartRooms(int rooms) {
+        SmartRoom[] newArr = new SmartRoom[sizeSmartRoom() + rooms];
+        for (int i = 0; i < sizeSmartRoom(); i++) {
+            newArr[i] = this.smartRooms[i];
+        }
+        this.smartRooms = newArr;
+    }
+
+    public void addNewSmartPlugs(int plugs) {
+        SmartPlug[] newArr = new SmartPlug[sizeSmartPlug() + plugs];
+        for (int i = 0; i < sizeSmartPlug(); i++) {
+            newArr[i] = this.smartPlugs[i];
+        }
+        this.smartPlugs = newArr;
     }
 
     public String displaySmartRooms() {
         String s = "";
         for (int i = 0; i < sizeSmartRoom(); i++) {
-            s += "\t[" + i + "]\t" + smartRooms.get(i).getRoomName() + "\n";
+            s += "\t[" + i + "]\t" + smartRooms[i].getRoomName() + "\n";
         }
         return s;
     }
 
     public String displaySmartAppliances() {
         String s = "";
-        for (int i = 0; i < smartAppliances.size(); i++) {
-            s += "\t[" + i + "]\t" + smartAppliances.get(i) + "\n";
+        for (int i = 0; i < sizeSmartAppliance(); i++) {
+            s += "\t[" + i + "]\t" + smartAppliances[i] + "\n";
         }
         return s;
     }
@@ -68,9 +94,9 @@ public class SmartBuilding {
     public String displaySmartPlugs() {
         String s = "";
         for (int i = 0; i < sizeSmartPlug(); i++) {
-            s += "\t[ " + i + " ]\tSmartPlug | attached to: " + smartAppliances.get(smartPlugs.get(i).getApplianceID()) + "\t| Room: "
-                    + smartRooms.get(smartPlugs.get(i).getRoomID()).getRoomName() + "\t| Status: "
-                    + (smartPlugs.get(i).getStatus() == false ? "Off" : "On") + "\n";
+            s += "\t[ " + i + " ]\tSmartPlug | attached to: " + smartAppliances[smartPlugs[i].getApplianceID()] + "\t| Room: "
+                    + smartRooms[smartPlugs[i].getRoomID()].getRoomName() + "\t| Status: "
+                    + (smartPlugs[i].getStatus() == false ? "Off" : "On") + "\n";
         }
         return s;
     }
@@ -78,11 +104,11 @@ public class SmartBuilding {
     public String displaySmartPlugs(int roomID) {
         String s = "";
         for (int i = 0; i < sizeSmartPlug(); i++) {
-            if (smartPlugs.get(i).getRoomID() == roomID)
+            if (smartPlugs[i].getRoomID() == roomID)
                 s += "\t[ " + i + " ]\tSmartPlug | attached to: "
-                        + smartAppliances.get(smartPlugs.get(i).getApplianceID()) + "\t| Room: "
-                        + smartRooms.get(smartPlugs.get(i).getRoomID()).getRoomName() + "\t| Status: "
-                        + (smartPlugs.get(i).getStatus() == false ? "Off" : "On") + "\n";
+                        + smartAppliances[smartPlugs[i].getApplianceID()] + "\t| Room: "
+                        + smartRooms[smartPlugs[i].getRoomID()].getRoomName() + "\t| Status: "
+                        + (smartPlugs[i].getStatus() == false ? "Off" : "On") + "\n";
         }
         return s;
     }
@@ -93,8 +119,8 @@ public class SmartBuilding {
             s += "ROOM: " + i + "\n";
             for (SmartPlug object : smartPlugs) {
                 if (i == object.getRoomID()) {
-                    s += "\tSmartPlug | attached to: " + smartAppliances.get(object.getApplianceID()) + "\t| Room: "
-                            + smartRooms.get(object.getRoomID()).getRoomName() + "\t| Status: "
+                    s += "\tSmartPlug | attached to: " + smartAppliances[object.getApplianceID()] + "\t| Room: "
+                            + smartRooms[object.getRoomID()].getRoomName() + "\t| Status: "
                             + (object.getStatus() == false ? "Off" : "On") + "\n";
                 }
 
@@ -155,9 +181,5 @@ public class SmartBuilding {
         for (SmartPlug smartPlug : smartPlugs) {
             if (smartPlug.getPlugID() == plug) smartPlug.setRoomID(roomID);
         }
-    }
-
-    public void addSmartAppliance(String name) {
-        smartAppliances.add(name);
     }
 }
