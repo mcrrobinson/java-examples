@@ -1,2 +1,2 @@
 # Java Example
-A bunch of Java exercises for University in Java.
+A bunch of Java exercises for University of Portsmouth.
